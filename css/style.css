@@ -48,10 +48,31 @@ img {
 .mb-2 {
   margin-bottom: 2rem !important; }
 
+@keyframes bounce {
+  0% {
+    transform: rotate(-45deg); }
+  10% {
+    transform: rotate(-35deg); }
+  70% {
+    transform: rotate(20deg); }
+  80% {
+    transform: rotate(-10deg); }
+  90% {
+    transform: rotate(5deg); }
+  100% {
+    transform: rotate(0deg); } }
+
+/* Landscape phones and down */
+/* Landscape phone to portrait tablet */
+/* Portrait tablet to landscape and desktop */
+/* Large desktop */
 .grid-container {
   display: grid;
-  grid: "picture header" auto "aside main" 1fr /350px auto;
+  grid: "picture header" auto "aside main" 1fr "footer footer" auto / 350px auto;
   min-height: 100vh; }
+  @media (max-width: 480px) {
+    .grid-container {
+      grid: "header" auto "main" auto "picture" auto "aside" auto "footer " auto / auto; } }
 
 header {
   color: white;
@@ -62,14 +83,23 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+  @media (max-width: 480px) {
+    header {
+      padding: 5rem 2rem; } }
   header h1 {
     font-size: 6rem;
     line-height: 8rem;
     font-weight: 300;
     letter-spacing: 1.8rem; }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 4rem; } }
   header p {
     font-size: 2rem;
     letter-spacing: 1rem; }
+  header span {
+    display: inline-block;
+    animation: bounce 1s; }
 
 .picture {
   border-right: 1px solid var(--border);
@@ -128,18 +158,32 @@ aside {
       display: flex;
       justify-content: start;
       align-items: center;
-      margin: 2rem 0; }
-      aside .bloc .social-container i {
-        font-size: 2rem;
-        flex: 0 0 0 50px;
-        margin-right: 1rem; }
-      aside .bloc .social-container p {
-        flex: auto;
-        margin: 0; }
+      padding: 1rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s; }
+      aside .bloc .social-container:hover {
+        background: var(--border); }
+        aside .bloc .social-container:hover i {
+          color: var(--primary);
+          transform: scale(1.5);
+          transition: all 0.3s; }
+      aside .bloc .social-container a {
+        display: flex;
+        flex-direction: row; }
+        aside .bloc .social-container a i {
+          font-size: 2rem;
+          flex: 0 0 0 50px;
+          margin-right: 2rem; }
+        aside .bloc .social-container a p {
+          flex: auto;
+          margin: 0; }
 
 main {
   grid-area: main;
   padding: 5rem; }
+  @media (max-width: 480px) {
+    main {
+      padding: 5rem 1.5rem; } }
   main h2 {
     padding-bottom: 4rem; }
   main p {
@@ -163,3 +207,56 @@ main {
         margin: 2rem 0;
         list-style: circle;
         padding-left: 5rem; }
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  grid-area: footer;
+  padding: 5rem 1.5rem;
+  background: var(--text); }
+  @media (max-width: 480px) {
+    footer {
+      padding: 1.5rem; } }
+  footer h2 {
+    margin-bottom: 3rem; }
+  footer form {
+    display: flex;
+    align-items: center; }
+  footer input {
+    min-width: 400px;
+    padding: 1rem 2rem;
+    line-height: 2rem;
+    outline: none;
+    border: none; }
+    @media (max-width: 480px) {
+      footer input {
+        min-width: 200px; } }
+    footer input::placeholder {
+      color: var(--text); }
+  footer .prefix {
+    background: linear-gradient(to right, var(--dark), var(--light));
+    padding: 1rem 2rem;
+    color: white;
+    font-size: 2rem;
+    border-top-left-radius: 20%;
+    border-bottom-left-radius: 20%; }
+  footer button {
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    outline: none;
+    background: var(--text); }
+    footer button:hover {
+      opacity: 0.8; }
+    footer button .postfix {
+      background: linear-gradient(to left, var(--dark), var(--light));
+      padding: 1rem 2rem;
+      color: white;
+      font-size: 2rem;
+      border-top-right-radius: 20%;
+      border-bottom-right-radius: 20%;
+      outline: none; }
